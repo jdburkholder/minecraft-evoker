@@ -8,6 +8,8 @@ SERVER_NAME=`cat /var/lib/cloud/data/server_name`
 
 install_updates() {
   sudo yum update -y
+  sudo yum remove java-1.7.0-openjdk -y
+  sudo yum remove java-1.6.0-openjdk -y
 }
 
 download_server() {

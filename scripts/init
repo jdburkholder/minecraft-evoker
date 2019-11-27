@@ -25,13 +25,14 @@ BACKUPPATH="$MC_HOME/backups"
 WORLD='world'
 
 # Server
-SERVICE='server.jar'
+# SERVICE='server.jar'
+SERVICE=FTBserver-1.12.2-14.23.5.2846-universal.jar
 OPTIONS='nogui'
 MAXHEAP=`cat /var/lib/cloud/data/max_heap`
 MINHEAP=`cat /var/lib/cloud/data/min_heap`
 CPU_COUNT=`cat /var/lib/cloud/data/cpus`
 HISTORY=1024
-INVOCATION="java -Xmx${MAXHEAP}M -Xms${MINHEAP}M -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalPacing -XX:ParallelGCThreads=${CPU_COUNT} -XX:+AggressiveOpts -jar $SERVICE $OPTIONS"
+INVOCATION="$MC_HOME/ServerStart.sh"
 
 ME=`whoami`
 as_user() {
@@ -43,6 +44,7 @@ as_user() {
 }
 
 mc_start() {
+  set -x
   if  pgrep -u $USERNAME -f $SERVICE > /dev/null ; then
     echo "The server is already running!"
   else
