@@ -25,14 +25,13 @@ BACKUPPATH="$MC_HOME/backups"
 WORLD='world'
 
 # Server
-# SERVICE='server.jar'
-SERVICE=FTBserver-1.12.2-14.23.5.2846-universal.jar
+SERVICE='server.jar'
 OPTIONS='nogui'
 MAXHEAP=`cat /var/lib/cloud/data/max_heap`
 MINHEAP=`cat /var/lib/cloud/data/min_heap`
 CPU_COUNT=`cat /var/lib/cloud/data/cpus`
 HISTORY=1024
-INVOCATION="$MC_HOME/ServerStart.sh"
+INVOCATION="/usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java -Xmx${MAXHEAP}M -Xms${MINHEAP}M -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalPacing -XX:ParallelGCThreads=${CPU_COUNT} -XX:+AggressiveOpts -jar $SERVICE $OPTIONS"
 
 ME=`whoami`
 as_user() {
